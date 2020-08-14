@@ -1,5 +1,6 @@
 package in.codecrescendo.blog.controller;
 
+import in.codecrescendo.blog.wrapper.input.PostInputWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.codecrescendo.blog.entity.Post;
-import in.codecrescendo.blog.service.PostServiceImpl;
+import in.codecrescendo.blog.service.IPostService;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -16,7 +17,7 @@ import in.codecrescendo.blog.service.PostServiceImpl;
 public class PostController {
 	
 	@Autowired
-	private PostServiceImpl postServiceImpl;
+	private IPostService postService;
 	
 	@GetMapping("/hello")
 	public String hi()
@@ -25,9 +26,9 @@ public class PostController {
 	}
 	
 	@PostMapping(value = "/posts")
-	public Post savePost(@RequestBody Post post)
+	public Post savePost(@RequestBody PostInputWrapper post)
 	{
-		return postServiceImpl.savePost(post);
+		return postService.savePost(post);
 	}
 
 }

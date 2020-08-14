@@ -1,13 +1,8 @@
 package in.codecrescendo.blog.entity;
 
-import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "blog_post")
@@ -16,69 +11,88 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "post_id")
-	private int post_id;
+	private int postId;
 	
 	@Column(name = "post_title")
-	private String post_title;
-	
-	@Column(name ="user_id")
-	private int user_id;
+	private String postTitle;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id", nullable=false)
+	private User userId;
 	
 	@Column(name = "post_body")
-	private String post_body;
+	private String postBody;
 	
 	@Column(name = "created_at")
-	private Date created_at;
+	private Date createdAt;
 	
 	@Column(name = "modified_at")
-	private Date modified_at;
+	private Date modifiedAt;
 	
 	@Column(name = "is_draft")
-	private String is_draft;
-	
-	
-	public int getPost_id() {
-		return post_id;
+	private Integer isDraft;
+
+	public Post() {
+		this.postId = 0;
+		this.postTitle = "";
+		this.userId = null;
+		this.postBody = "";
+		this.createdAt = null;
+		this.modifiedAt = null;
+		this.isDraft = 0;
 	}
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public Post(int postId, String postTitle, User userId, String postBody, Date createdAt, Date modifiedAt, Integer isDraft) {
+		this.postId = postId;
+		this.postTitle = postTitle;
+		this.userId = userId;
+		this.postBody = postBody;
+		this.createdAt = createdAt;
+		this.modifiedAt = modifiedAt;
+		this.isDraft = isDraft;
 	}
-	public String getPost_title() {
-		return post_title;
+
+	public int getpostId() {
+		return postId;
 	}
-	public void setPost_title(String post_title) {
-		this.post_title = post_title;
+	public void setpostId(int postId) {
+		this.postId = postId;
 	}
-	public int getUser_id() {
-		return user_id;
+	public String getpostTitle() {
+		return postTitle;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setpostTitle(String postTitle) {
+		this.postTitle = postTitle;
 	}
-	public String getPost_body() {
-		return post_body;
+	public User getuserId() {
+		return userId;
 	}
-	public void setPost_body(String post_body) {
-		this.post_body = post_body;
+	public void setuserId(User userId) {
+		this.userId = userId;
 	}
-	public Date getCreated_at() {
-		return created_at;
+	public String getpostBody() {
+		return postBody;
 	}
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setpostBody(String postBody) {
+		this.postBody = postBody;
 	}
-	public Date getModified_at() {
-		return modified_at;
+	public Date getcreatedAt() {
+		return createdAt;
 	}
-	public void setModified_at(Date modified_at) {
-		this.modified_at = modified_at;
+	public void setcreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-	public String getIs_draft() {
-		return is_draft;
+	public Date getmodifiedAt() {
+		return modifiedAt;
 	}
-	public void setIs_draft(String is_draft) {
-		this.is_draft = is_draft;
+	public void setmodifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
 	}
-	
-	
+
+	public Integer getIsDraft() {
+		return isDraft;
+	}
+
+	public void setIsDraft(Integer isDraft) {
+		this.isDraft = isDraft;
+	}
 }

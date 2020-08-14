@@ -1,13 +1,8 @@
 package in.codecrescendo.blog.entity;
 
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "user")
@@ -16,68 +11,89 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
-	private int user_id;
-	
+	private int userId;
+
 	@Column(name = "user_name")
-	private String user_name;
-	
+	private String userName;
+
 	@Column(name = "user_email")
-	private String user_email;
-	
+	private String userEmail;
+
 	@Column(name = "user_password")
-	private String user_password;
-	
+	private String userPassword;
+
 	@Column(name = "user_role")
-	private String user_role;
-	
+	private String userRole;
+
 	@Column(name = "status")
 	private String status;
 
-	public int getUser_id() {
-		return user_id;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Post> post;
+
+	public User() {
+		this.userId = 0;
+		this.userName = "";
+		this.userEmail = "";
+		this.userPassword = "";
+		this.userRole = "";
+		this.status = "";
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public User(int userId, String userName, String userEmail, String userPassword, String userRole, String status) {
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.userRole = userRole;
+		this.status = status;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getUser_email() {
-		return user_email;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getUser_password() {
-		return user_password;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUser_password(String user_password) {
-		this.user_password = user_password;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	public String getUser_role() {
-		return user_role;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setUser_role(String user_role) {
-		this.user_role = user_role;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public String getstatus() {
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setstatus(String status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }
