@@ -2,9 +2,9 @@
 
 ## Save user
 
-*API:* `http://localhost:8095/api/users`
+*API:* `POST http://localhost:8095/api/users`
 
-*Request*
+**Request**
 ```
 {
     "user_name":"Anjali",
@@ -13,7 +13,7 @@
     "user_role": "Publisher"
 }
 ```
-*Response*
+**Response**
 ```
 {
     "userId": 11,
