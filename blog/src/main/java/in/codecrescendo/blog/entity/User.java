@@ -12,7 +12,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int userId;
-
+	
 	@Column(name = "user_name")
 	private String userName;
 
