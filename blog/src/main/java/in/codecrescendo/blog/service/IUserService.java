@@ -4,12 +4,13 @@ import in.codecrescendo.blog.entity.User;
 import in.codecrescendo.blog.wrapper.input.UserInputWrapper;
 
 public interface IUserService {
-	public User saveUser(UserInputWrapper user);
+	User saveUser(UserInputWrapper user);
 
-	public User findById(int userId);
-	public void deleteById(int userId);
+	User findById(int userId) throws Exception;
 
-	public User findByName(String userName);
+	void deleteById(int userId) throws Exception;
 
-	public User updateByName(String userName, UserInputWrapper user);
+	User findByName(String userName);
+
+	User updateByName(String userName, UserInputWrapper user);
 }
