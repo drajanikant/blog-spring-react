@@ -18,13 +18,14 @@ public class PostService implements IPostService {
 
 	@Autowired
 	private UserRepository userRepository;
+
 	@Override
 	public Post savePost(PostInputWrapper post)
 	{
 		Post newPost = new Post();
 		newPost.setpostTitle(post.getPost_title());
 		newPost.setpostBody(post.getPost_body());
-		newPost.setuserId(userRepository.findById(post.getUser_id()).get());
+		newPost.setUser(userRepository.findById(post.getUser_id()).get());
 		newPost.setcreatedAt(new Date());
 		newPost.setmodifiedAt(new Date());
 		newPost.setIsDraft(1);

@@ -18,7 +18,7 @@ public class Post {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false)
-	private User userId;
+	private User user;
 	
 	@Column(name = "post_body")
 	private String postBody;
@@ -35,16 +35,16 @@ public class Post {
 	public Post() {
 		this.postId = 0;
 		this.postTitle = "";
-		this.userId = null;
+		this.user = null;
 		this.postBody = "";
 		this.createdAt = null;
 		this.modifiedAt = null;
 		this.isDraft = 0;
 	}
-	public Post(int postId, String postTitle, User userId, String postBody, Date createdAt, Date modifiedAt, Integer isDraft) {
+	public Post(int postId, String postTitle, User user, String postBody, Date createdAt, Date modifiedAt, Integer isDraft) {
 		this.postId = postId;
 		this.postTitle = postTitle;
-		this.userId = userId;
+		this.user = user;
 		this.postBody = postBody;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
@@ -63,11 +63,11 @@ public class Post {
 	public void setpostTitle(String postTitle) {
 		this.postTitle = postTitle;
 	}
-	public User getuserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setuserId(User userId) {
-		this.userId = userId;
+	public void setUser(User userId) {
+		this.user = user;
 	}
 	public String getpostBody() {
 		return postBody;

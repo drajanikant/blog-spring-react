@@ -19,12 +19,6 @@ public class PostController {
 	@Autowired
 	private IPostService postService;
 	
-	@GetMapping("/hello")
-	public String hi()
-	{
-		return "Hello";
-	}
-	
 	@PostMapping(value = "/posts")
 	public Post savePost(@RequestBody PostInputWrapper post)
 	{
