@@ -13,7 +13,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Override
 	public User saveUser(UserInputWrapper _user) {
 		User user =new User();
@@ -24,8 +24,35 @@ public class UserService implements IUserService {
 		user.setStatus("Active");
 		return userRepository.save(user);
 	}
-	
 
-	
+	@Override
+	public User findById(int userId) {
+		User user=userRepository.findById(userId).get();
+		return user;
+	}
+
+	public void deleteById(int userId) {
+
+		userRepository.deleteById(userId);
+
+	}
+
+	@Override
+	public User updateByName(String userName,UserInputWrapper userObj) {
+//		userRepository.fin
+		User user=findByName(userName);
+		user.setUserName(userObj.getUser_name());
+		user.setUserEmail(userObj.getUser_email());
+		user.setUserPassword(userObj.getUser_password());
+		user.setUserRole(userObj.getUser_role());
+		user.setStatus("Active");
+		return userRepository.save(user);
+	}
+
+	@Override
+	public User findByName(String userName) {
+		return userRepository.findByName(userName);
+	}
+
 
 }

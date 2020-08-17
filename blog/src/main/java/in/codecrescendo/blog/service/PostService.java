@@ -13,12 +13,11 @@ import java.util.Date;
 @Service
 public class PostService implements IPostService {
 
-	@Autowired	
+	@Autowired
 	private PostRepository postRepository;
 
 	@Autowired
 	private UserRepository userRepository;
-
 	@Override
 	public Post savePost(PostInputWrapper post)
 	{
@@ -31,6 +30,5 @@ public class PostService implements IPostService {
 		newPost.setIsDraft(1);
 		return postRepository.save(newPost);
 	}
-	
-	
+
 }
