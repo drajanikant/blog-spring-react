@@ -8,6 +8,8 @@ public class PostInputWrapper {
 
     private String post_body;
 
+	public int getPost_id;
+
     public PostInputWrapper() {
         this.post_title = "";
         this.user_id = 0;

@@ -66,7 +66,7 @@ public class Post {
 	public User getUser() {
 		return user;
 	}
-	public void setUser(User userId) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	public String getpostBody() {
@@ -95,4 +95,5 @@ public class Post {
 	public void setIsDraft(Integer isDraft) {
 		this.isDraft = isDraft;
 	}
+	
 }

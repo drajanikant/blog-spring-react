@@ -29,11 +29,7 @@ public class UserController {
     public User findById(@PathVariable int userId) throws Exception {
         return userService.findById(userId);
     }
-
-    @DeleteMapping(value = "/{userId}")
-    public void deleteById(@PathVariable int userId) throws Exception {
-        userService.deleteById(userId);
-    }
+  
 
     @PutMapping(value = "/{userName}")
     public User updateUser(@PathVariable String userName, @RequestBody UserInputWrapper userObj) {
