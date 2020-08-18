@@ -8,18 +8,20 @@ public class PostInputWrapper {
 
     private String post_body;
 
-	public int getPost_id;
+	public Integer post_id;
 
     public PostInputWrapper() {
         this.post_title = "";
         this.user_id = 0;
         this.post_body = "";
+        this.post_id = 0;
     }
 
-    public PostInputWrapper(String post_title, Integer user_id, String post_body) {
+    public PostInputWrapper(String post_title, Integer user_id, String post_body, Integer post_id) {
         this.post_title = post_title;
         this.user_id = user_id;
         this.post_body = post_body;
+        this.post_id = post_id;
     }
 
     public String getPost_title() {
@@ -44,5 +46,13 @@ public class PostInputWrapper {
 
     public void setPost_body(String post_body) {
         this.post_body = post_body;
+    }
+
+    public Integer getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(Integer post_id) {
+        this.post_id = post_id;
     }
 }

@@ -1,8 +1,12 @@
 package in.codecrescendo.blog.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
+import in.codecrescendo.blog.entity.User;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +40,21 @@ public class PostService implements IPostService {
 	
 	
 	@Override
-	public Post updateByID(int postId, PostInputWrapper postObj) {
-		Post newPost = new Post();
-		newPost.setpostId(postObj.getPost_id);
-		newPost.setpostTitle(postObj.getPost_title());
-		newPost.setpostBody(postObj.getPost_body());
-		newPost.setUser(userRepository.findById(postObj.getUser_id()).get());
-		newPost.setcreatedAt(new Date());
-		newPost.setmodifiedAt(new Date());
-		newPost.setIsDraft(1);
-		return postRepository.save(newPost);
+	public Post updateByID(int postId, PostInputWrapper postObj) throws Exception {
+		Optional<Post> newPost = postRepository.findById(postId);
+		if(newPost.isPresent()) {
+			//newPost.get().setpostId(postObj.getPost_id());
+			newPost.get().setpostTitle(postObj.getPost_title());
+			newPost.get().setpostBody(postObj.getPost_body());
+			// newPost.setUser(userRepository.findById(postObj.getUser_id()).get());
+			// newPost.setcreatedAt(new Date());
+			newPost.get().setmodifiedAt(new Date());
+			//newPost.get().setIsDraft(1);
+			return postRepository.save(newPost.get());
+		}else{
+			throw new Exception("Post not found");
+		}
+
 	}
 
 
@@ -55,6 +64,7 @@ public class PostService implements IPostService {
 		Optional<Post> post = postRepository.findById(postId);
 		if(post.isPresent())
 		{
+			postRepository.delete(post.get());
 			return post.get();
 		}
 		else
@@ -83,28 +93,18 @@ public class PostService implements IPostService {
 
 
 	@Override
-	public Post findByTitle(String postTitle) {
-		
-		return postRepository.findByTitle(postTitle);
+	public List<Post> findByTitle(String postTitle) {
+		List<Post> post = postRepository.findByTitle(postTitle);
+		return post;
 	}
 
-	
-		
-
-		
-		
-
-
-		
-
-
-
-
-		
-	
-
-
-		
-	
+	@Override
+	public List<Post> getAllPosts() throws Exception {
+		List<Post> posts = new ArrayList<>();
+		postRepository.findAll().forEach(user -> {
+			posts.add(user);
+		});
+		return posts;
+	}
 
 }

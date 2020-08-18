@@ -11,7 +11,7 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "post_id")
-	private int postId;
+	private Integer postId;
 	
 	@Column(name = "post_title")
 	private String postTitle;

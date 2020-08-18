@@ -1,5 +1,6 @@
 package in.codecrescendo.blog.controller;
 
+import in.codecrescendo.blog.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +15,15 @@ import in.codecrescendo.blog.entity.Post;
 import in.codecrescendo.blog.service.IPostService;
 import in.codecrescendo.blog.wrapper.input.PostInputWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/posts")
 public class PostController {
 	
 	@Autowired
 	private IPostService postService;
-	
-	@GetMapping("/hello")
-	public String hi()
-	{
-		return "Hello";
-	}
 	
 	@PostMapping
 	public Post savePost(@RequestBody PostInputWrapper post)
@@ -34,26 +32,28 @@ public class PostController {
 	}
 	
 	
-	@PutMapping(value = "/{post}")
-	public Post updatePost(@PathVariable int postId, @RequestBody PostInputWrapper postObj)
-	{
+	@PutMapping(value = "/{post_id}")
+	public Post updatePost(@PathVariable(value = "post_id") int postId, @RequestBody PostInputWrapper postObj) throws Exception {
 		return postService.updateByID(postId, postObj);
 	}
 	
-	@DeleteMapping(value = "/{postId}")
-	public void deleteById(@PathVariable int postId) throws Exception
+	@DeleteMapping(value = "/{post_id}")
+	public void deleteById(@PathVariable(value = "post_id") int postId) throws Exception
 	{
 		postService.deleteById(postId);
 	}
-	
-	
+
 	@GetMapping(value = "/{postId}")
-		public Post findById(@PathVariable int postId) throws Exception
-		{
-			return postService.findById(postId);
-		}
-	
-	
+	public Post findById(@PathVariable(value = "postId") int postId) throws Exception
+	{
+		return postService.findById(postId);
 	}
+
+	@GetMapping
+	public List<Post> getAllPosts() throws Exception {
+		return postService.getAllPosts();
+	}
+
+}
 
 

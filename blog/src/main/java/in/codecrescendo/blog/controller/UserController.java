@@ -20,6 +20,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * API for save user.
+     * @param user
+     * @return
+     */
     @PostMapping()
     public User saveUser(@RequestBody UserInputWrapper user) {
         return userService.saveUser(user);
