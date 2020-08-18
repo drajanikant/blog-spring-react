@@ -1,4 +1,4 @@
-	package in.codecrescendo.blog.service;
+package in.codecrescendo.blog.service;
 
 import in.codecrescendo.blog.dao.UserRepository;
 import in.codecrescendo.blog.wrapper.input.PostInputWrapper;
@@ -13,7 +13,7 @@ import java.util.Date;
 @Service
 public class PostService implements IPostService {
 
-	@Autowired	
+	@Autowired
 	private PostRepository postRepository;
 
 	@Autowired
@@ -24,12 +24,11 @@ public class PostService implements IPostService {
 		Post newPost = new Post();
 		newPost.setpostTitle(post.getPost_title());
 		newPost.setpostBody(post.getPost_body());
-		newPost.setuserId(userRepository.findById(post.getUser_id()).get());
+		newPost.setUser(userRepository.findById(post.getUser_id()).get());
 		newPost.setcreatedAt(new Date());
 		newPost.setmodifiedAt(new Date());
 		newPost.setIsDraft(1);
 		return postRepository.save(newPost);
 	}
-	
-	
+
 }

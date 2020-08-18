@@ -7,12 +7,12 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int userId;
-	
+
 	@Column(name = "user_name")
 	private String userName;
 

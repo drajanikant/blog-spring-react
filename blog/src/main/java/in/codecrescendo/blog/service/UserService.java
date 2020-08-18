@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import in.codecrescendo.blog.entity.User;
 
+import java.util.Optional;
+
 @Service
 public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Override
 	public User saveUser(UserInputWrapper _user) {
 		User user =new User();
@@ -26,15 +28,22 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User findById(int userId) {
-		User user=userRepository.findById(userId).get();
-		return user;
+	public User findById(int userId) throws Exception {
+		Optional<User> user = userRepository.findById(userId);
+		if(user.isPresent()){
+			return user.get();
+		}else{
+			throw new Exception("User not found");
+		}
 	}
-	
-	public void deleteById(int userId) {
-		
-		userRepository.deleteById(userId);
-		
+
+	public void deleteById(int userId) throws Exception {
+		Optional<User> user = userRepository.findById(userId);
+		if(user.isPresent()){
+			userRepository.deleteById(userId);
+		}else{
+			throw new Exception("User not found");
+		}
 	}
 
 	@Override
@@ -43,9 +52,9 @@ public class UserService implements IUserService {
 		User user=findByName(userName);
 		user.setUserName(userObj.getUser_name());
 		user.setUserEmail(userObj.getUser_email());
-		user.setUserPassword(userObj.getUser_password());
-		user.setUserRole(userObj.getUser_role());
-		user.setStatus("Active");
+		//user.setUserPassword(userObj.getUser_password());
+		//user.setUserRole(userObj.getUser_role());
+		//user.setStatus("Active");
 		return userRepository.save(user);
 	}
 
@@ -53,6 +62,6 @@ public class UserService implements IUserService {
 	public User findByName(String userName) {
 		return userRepository.findByName(userName);
 	}
-	
+
 
 }

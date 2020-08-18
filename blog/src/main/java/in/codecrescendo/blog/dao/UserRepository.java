@@ -10,7 +10,7 @@ import in.codecrescendo.blog.entity.User;
 @Repository
 public interface UserRepository extends CrudRepository<User,Integer> {
 
-	@Query("From User as u where u.userName=:userName")
-	public User findByName(@Param(value = "userName") String userName);
-	
+    @Query("From User as u where u.userName=:userName")
+    public User findByName(@Param(value = "userName") String userName);
+
 }

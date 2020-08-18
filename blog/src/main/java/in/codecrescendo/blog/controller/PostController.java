@@ -13,7 +13,6 @@ import in.codecrescendo.blog.service.IPostService;
 
 @RestController
 @RequestMapping(value = "/api")
-
 public class PostController {
 	
 	@Autowired
